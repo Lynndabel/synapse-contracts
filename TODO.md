@@ -1,10 +1,16 @@
-# Task: Add get_max_deposit() query + test
+# Issue #31: Cap max retry_count; emit MaxRetriesExceeded
 
-## Plan Steps:
-- [ ] Step 1: Create/switch to branch `feature/issue-44-get-max-deposit`
-- [x] Step 2: Edit `src/storage/mod.rs` - Add `max_deposit` module with set/get
-- [x] Step 3: Edit `src/lib.rs` - Add `set_max_deposit`, `get_max_deposit`, import, test
-- [x] Step 4: Run `cargo test` to verify
-- [x] Step 5: Commit changes
+## Original Steps (Completed)
+- [x] 1. Create/switch to branch `feature/issue-31-max-retries`
+- [x] 2. Edit `src/types/mod.rs`: Add MAX_RETRIES const, Event::DlqRetried & MaxRetriesExceeded variants
+- [x] 3. Edit `src/lib.rs`: Implement retry_dlq logic (check/increment retry_count, reset tx or emit+panic)
+- [x] 4. Edit `tests/contract_test.rs`: Update existing retry test, add retry/max retries tests
 
-Current: Complete
+## Merge Conflict Resolution (New)
+- [ ] 5. Resolve conflicts in src/types/mod.rs (clean Event enum + generate_id)
+- [ ] 6. Resolve conflicts in tests/contract_test.rs (add clean DLQ tests, remove outdated TODOs)
+- [ ] 7. Update this TODO.md
+- [ ] 8. Run `cargo check && cargo test`
+- [ ] 9. `git add . && git commit -m "Resolve merge conflicts for #31"`
+
+blow
