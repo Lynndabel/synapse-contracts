@@ -67,7 +67,7 @@ fn grant_relayer_emits_relayer_granted_event() {
 }
 
 #[test]
-#[should_panic]
+#[should_panic(expected = "not admin")]
 fn non_admin_cannot_grant_relayer() {
     let env = Env::default();
     let (_, client) = setup(&env);
@@ -119,7 +119,7 @@ fn add_and_remove_asset() {
 }
 
 #[test]
-#[should_panic]
+#[should_panic(expected = "asset not allowed")]
 fn register_deposit_rejects_unlisted_asset() {
     let env = Env::default();
     let (admin, client) = setup(&env);
@@ -172,7 +172,7 @@ fn register_deposit_is_idempotent() {
 }
 
 #[test]
-#[should_panic]
+#[should_panic(expected = "not relayer")]
 fn register_deposit_rejects_non_relayer() {
     let env = Env::default();
     let (admin, client) = setup(&env);
@@ -274,7 +274,7 @@ fn original_relayer_can_retry_dlq() {
 }
 
 #[test]
-#[should_panic]
+#[should_panic(expected = "not admin or original relayer")]
 fn unrelated_relayer_cannot_retry_dlq() {
     let env = Env::default();
     let (admin, client) = setup(&env);
