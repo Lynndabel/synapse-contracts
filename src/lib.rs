@@ -94,8 +94,18 @@ impl SynapseContract {
         emit(&env, Event::AssetRemoved(asset_code));
     }
 
+    pub fn set_max_deposit(env: Env, caller: Address, amount: i128) {
+        require_admin(&env, &caller);
+        if amount <= 0 { panic!("max deposit must be positive") }
+        max_deposit::set(&env, amount);
+    }
+
+    pub fn get_max_deposit(env: Env) -> Option<i128> {
+        max_deposit::get(&env)
+    }
+
     // TODO(#15): enforce minimum deposit amount (configurable by admin)
-    // TODO(#16): enforce maximum deposit amount (configurable by admin)
+    // TODO(#16): enforce maximum deposit amount (configurable by admin) — DONE
     // TODO(#17): validate anchor_transaction_id is non-empty
     // TODO(#18): add `memo` field support (mirrors synapse-core CallbackPayload)
     // TODO(#19): add `memo_type` field support (text | hash | id)
@@ -113,6 +123,10 @@ impl SynapseContract {
         require_not_paused(&env);
         require_relayer(&env, &caller);
         assets::require_allowed(&env, &asset_code);
+
+        if let Some(max) = max_deposit::get(&env) {
+            if amount > max { panic!("amount exceeds max deposit") }
+        }
 
         if let Some(existing) = deposits::find_by_anchor_id(&env, &anchor_transaction_id) {
             return existing;
@@ -265,7 +279,7 @@ impl SynapseContract {
     // TODO(#40): add `get_dlq_entry(tx_id)` query
     // TODO(#41): add `get_admin()` query
     // TODO(#43): add `get_min_deposit()` query
-    // TODO(#44): add `get_max_deposit()` query
+    // TODO(#44): add `get_max_deposit()` query — DONE
 
     pub fn get_admin(env: Env) -> Address {
         storage::admin::get(&env)
