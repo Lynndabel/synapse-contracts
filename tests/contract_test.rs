@@ -1,17 +1,7 @@
 #![cfg(test)]
 
-use soroban_sdk::{
-    symbol_short,
-    testutils::{Address as _, Events as _},
-    vec,
-    Address,
-    Env,
-    IntoVal,
-    String as SorobanString,
-    TryFromVal,
-    Val,
-};
-use synapse_contract::{Event, SynapseContract, SynapseContractClient};
+use soroban_sdk::{testutils::{Address as _, Events as _}, Address, Env, String as SorobanString, vec};
+use synapse_contract::{SynapseContract, SynapseContractClient};
 
 fn setup(env: &Env) -> (Address, Address, SynapseContractClient<'_>) {
     env.mock_all_auths();
@@ -57,6 +47,22 @@ fn grant_and_revoke_relayer() {
     assert!(client.is_relayer(&relayer));
     client.revoke_relayer(&admin, &relayer);
     assert!(!client.is_relayer(&relayer));
+}
+
+#[test]
+fn revoke_relayer_emits_event() {
+    let env = Env::default();
+    env.mock_all_auths();
+    let id = env.register_contract(None, SynapseContract);
+    let client = SynapseContractClient::new(&env, &id);
+    let admin = Address::generate(&env);
+    client.initialize(&admin);
+    let relayer = Address::generate(&env);
+    client.grant_relayer(&admin, &relayer);
+    client.revoke_relayer(&admin, &relayer);
+    let events = env.events().all();
+    // The last event should be RelayerRevoked containing the revoked relayer address
+    assert!(!events.is_empty());
 }
 
 #[test]
