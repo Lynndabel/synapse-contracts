@@ -25,10 +25,3 @@ pub fn require_not_paused(env: &Env) {
         panic!("contract paused")
     }
 }
-
-pub fn require_admin_or_original_relayer(env: &Env, caller: &Address, original_relayer: &Address) {
-    caller.require_auth();
-    if *caller != admin::get(env) && *caller != *original_relayer {
-        panic!("not admin or original relayer")
-    }
-}

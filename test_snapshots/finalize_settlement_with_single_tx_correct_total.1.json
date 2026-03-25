@@ -80,7 +80,7 @@
                   "address": "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHK3M"
                 },
                 {
-                  "string": "a3"
+                  "string": "a9"
                 },
                 {
                   "address": "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAITA4"
@@ -114,7 +114,7 @@
                   "address": "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHK3M"
                 },
                 {
-                  "string": "0-0"
+                  "string": "a9"
                 }
               ]
             }
@@ -136,7 +136,7 @@
                   "address": "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHK3M"
                 },
                 {
-                  "string": "0-0"
+                  "string": "a9"
                 }
               ]
             }
@@ -163,7 +163,7 @@
                 {
                   "vec": [
                     {
-                      "string": "0-0"
+                      "string": "a9"
                     }
                   ]
                 },
@@ -208,7 +208,7 @@
                   "symbol": "AnchorIdx"
                 },
                 {
-                  "string": "a3"
+                  "string": "a9"
                 }
               ]
             },
@@ -228,13 +228,13 @@
                       "symbol": "AnchorIdx"
                     },
                     {
-                      "string": "a3"
+                      "string": "a9"
                     }
                   ]
                 },
                 "durability": "persistent",
                 "val": {
-                  "string": "0-0"
+                  "string": "a9"
                 }
               }
             },
@@ -253,7 +253,7 @@
                   "symbol": "Settlement"
                 },
                 {
-                  "string": "0-0"
+                  "string": "settlement-0"
                 }
               ]
             },
@@ -273,7 +273,7 @@
                       "symbol": "Settlement"
                     },
                     {
-                      "string": "0-0"
+                      "string": "settlement-0"
                     }
                   ]
                 },
@@ -301,7 +301,7 @@
                         "symbol": "id"
                       },
                       "val": {
-                        "string": "0-0"
+                        "string": "settlement-0"
                       }
                     },
                     {
@@ -338,7 +338,7 @@
                       "val": {
                         "vec": [
                           {
-                            "string": "0-0"
+                            "string": "a9"
                           }
                         ]
                       }
@@ -362,7 +362,7 @@
                   "symbol": "Tx"
                 },
                 {
-                  "string": "0-0"
+                  "string": "a9"
                 }
               ]
             },
@@ -382,7 +382,7 @@
                       "symbol": "Tx"
                     },
                     {
-                      "string": "0-0"
+                      "string": "a9"
                     }
                   ]
                 },
@@ -405,7 +405,7 @@
                         "symbol": "anchor_transaction_id"
                       },
                       "val": {
-                        "string": "a3"
+                        "string": "a9"
                       }
                     },
                     {
@@ -429,15 +429,7 @@
                         "symbol": "id"
                       },
                       "val": {
-                        "string": "0-0"
-                      }
-                    },
-                    {
-                      "key": {
-                        "symbol": "relayer"
-                      },
-                      "val": {
-                        "address": "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHK3M"
+                        "string": "a9"
                       }
                     },
                     {
@@ -1021,7 +1013,7 @@
                   "address": "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHK3M"
                 },
                 {
-                  "string": "a3"
+                  "string": "a9"
                 },
                 {
                   "address": "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAITA4"
@@ -1060,10 +1052,10 @@
                   "symbol": "DepositRegistered"
                 },
                 {
-                  "string": "0-0"
+                  "string": "a9"
                 },
                 {
-                  "string": "a3"
+                  "string": "a9"
                 }
               ]
             }
@@ -1088,7 +1080,7 @@
               }
             ],
             "data": {
-              "string": "0-0"
+              "string": "a9"
             }
           }
         }
@@ -1119,7 +1111,7 @@
                   "address": "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHK3M"
                 },
                 {
-                  "string": "0-0"
+                  "string": "a9"
                 }
               ]
             }
@@ -1146,7 +1138,7 @@
                   "symbol": "StatusUpdated"
                 },
                 {
-                  "string": "0-0"
+                  "string": "a9"
                 },
                 {
                   "vec": [
@@ -1207,7 +1199,7 @@
                   "address": "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHK3M"
                 },
                 {
-                  "string": "0-0"
+                  "string": "a9"
                 }
               ]
             }
@@ -1234,7 +1226,7 @@
                   "symbol": "StatusUpdated"
                 },
                 {
-                  "string": "0-0"
+                  "string": "a9"
                 },
                 {
                   "vec": [
@@ -1300,7 +1292,7 @@
                 {
                   "vec": [
                     {
-                      "string": "0-0"
+                      "string": "a9"
                     }
                   ]
                 },
@@ -1338,40 +1330,10 @@
             "data": {
               "vec": [
                 {
-                  "symbol": "Settled"
-                },
-                {
-                  "string": "0-0"
-                },
-                {
-                  "string": "0-0"
-                }
-              ]
-            }
-          }
-        }
-      },
-      "failed_call": false
-    },
-    {
-      "event": {
-        "ext": "v0",
-        "contract_id": "0000000000000000000000000000000000000000000000000000000000000001",
-        "type_": "contract",
-        "body": {
-          "v0": {
-            "topics": [
-              {
-                "symbol": "synapse"
-              }
-            ],
-            "data": {
-              "vec": [
-                {
                   "symbol": "SettlementFinalized"
                 },
                 {
-                  "string": "0-0"
+                  "string": "settlement-0"
                 },
                 {
                   "string": "USD"
@@ -1405,7 +1367,7 @@
               }
             ],
             "data": {
-              "string": "0-0"
+              "string": "settlement-0"
             }
           }
         }
@@ -1431,7 +1393,7 @@
               }
             ],
             "data": {
-              "string": "0-0"
+              "string": "settlement-0"
             }
           }
         }
@@ -1476,7 +1438,7 @@
                     "symbol": "id"
                   },
                   "val": {
-                    "string": "0-0"
+                    "string": "settlement-0"
                   }
                 },
                 {
@@ -1513,7 +1475,7 @@
                   "val": {
                     "vec": [
                       {
-                        "string": "0-0"
+                        "string": "a9"
                       }
                     ]
                   }

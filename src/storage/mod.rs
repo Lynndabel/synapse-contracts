@@ -5,6 +5,9 @@ use soroban_sdk::{contracttype, Address, Env, String as SorobanString};
 // TODO(#59): use temporary() storage for in-flight idempotency locks
 // TODO(#60): add DlqCount key to track total DLQ entries without scanning
 
+const TX_TTL_THRESHOLD: u32 = 17_280;
+const TX_TTL_EXTEND_TO: u32 = 172_800;
+
 #[contracttype]
 pub enum StorageKey {
     Admin,
@@ -68,9 +71,26 @@ pub mod relayers {
 pub mod assets {
     use super::*;
     pub fn add(env: &Env, code: &SorobanString) {
+        if is_allowed(env, code) {
+            return;
+        }
+        if count(env) >= MAX_ASSETS {
+            panic!("max assets reached")
+        }
         env.storage()
             .instance()
             .set(&StorageKey::Asset(code.clone()), &true);
+        set_count(env, count(env) + 1);
+    }
+    pub fn remove(env: &Env, code: &SorobanString) {
+        if !is_allowed(env, code) {
+            return;
+        }
+        env.storage()
+            .instance()
+            .remove(&StorageKey::Asset(code.clone()));
+        set_count(env, count(env).saturating_sub(1));
+        env.storage().instance().set(&StorageKey::Asset(code.clone()), &true);
     }
     pub fn remove(env: &Env, code: &SorobanString) {
         env.storage()
@@ -89,12 +109,26 @@ pub mod assets {
     }
 }
 
+pub mod max_deposit {
+    use super::*;
+
+    pub fn set(env: &Env, amount: &i128) {
+        env.storage().instance().set(&StorageKey::MaxDeposit, amount);
+    }
+
+    pub fn get(env: &Env) -> i128 {
+        env.storage().instance().get(&StorageKey::MaxDeposit).unwrap_or(&0i128).clone()
+    }
+}
+
 pub mod deposits {
     use super::*;
     pub fn save(env: &Env, tx: &Transaction) {
+        let key = StorageKey::Tx(tx.id.clone());
+        env.storage().persistent().set(&key, tx);
         env.storage()
             .persistent()
-            .set(&StorageKey::Tx(tx.id.clone()), tx);
+            .extend_ttl(&key, TX_TTL_THRESHOLD, TX_TTL_EXTEND_TO);
     }
     pub fn get(env: &Env, id: &SorobanString) -> Transaction {
         env.storage()
@@ -126,6 +160,19 @@ pub mod settlements {
             .persistent()
             .get(&StorageKey::Settlement(id.clone()))
             .expect("settlement not found")
+    }
+    pub fn extend_ttl(env: &Env, id: &SorobanString) {
+        env.storage().persistent().extend_ttl(&StorageKey::Settlement(id.clone()), 535679, 535679);
+    }
+}
+
+pub mod max_deposit {
+    use super::*;
+    pub fn set(env: &Env, amount: i128) {
+        env.storage().instance().set(&StorageKey::MaxDeposit, &amount);
+    }
+    pub fn get(env: &Env) -> Option<i128> {
+        env.storage().instance().get(&StorageKey::MaxDeposit)
     }
 }
 
